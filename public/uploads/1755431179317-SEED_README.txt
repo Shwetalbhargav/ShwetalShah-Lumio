@@ -1,0 +1,23 @@
+
+Legal Billables – Split JSON seed (new schema)
+
+Generated: 2025-08-13T09:34:04.763321Z
+
+Files:
+- firms.newschema.json            — 1 firm(s), as-is from seed
+- users.newschema.json            — 24 user(s), as-is from seed
+- clients.newschema.json          — 30 client(s), adds: email (from contactInfo), phone=null
+- cases.newschema.json            — 30 case(s), as-is
+- billables.newschema.json        — 0 items (placeholder). Fields: ['_id', 'caseId', 'clientId', 'userId', 'category', 'description', 'durationMinutes', 'rate', 'amount', 'date']
+- emailentries.newschema.json     — 0 items (placeholder). Fields: ['_id', 'userId', 'recipient', 'subject', 'typingTimeMinutes', 'billableSummary', 'createdAt']
+- invoices.newschema.json         — 0 items (placeholder). Fields: ['_id', 'clientId', 'caseId', 'issuedDate', 'dueDate', 'status', 'items', 'totalAmount', 'notes']
+- teamassignments.newschema.json  — 0 items (placeholder). Fields: ['_id', 'caseId', 'userId', 'role']
+- integration_logs.newschema.json — 0 items (placeholder). Fields: ['_id', 'provider', 'entity', 'entityId', 'direction', 'status', 'message', 'createdAt']
+
+Notes:
+• Billables use durationMinutes (unified unit). Compute amount = (minutes/60) * rate.
+• EmailEntry.userId should be an ObjectId string (to match other collections).
+• Clients now have email + phone; we keep legacy contactInfo for backward compatibility.
+• You can import each file with mongoimport, e.g.:
+  mongoimport --uri "$MONGO_URI" --db LegalBilling --collection clients --file clients.newschema.json --jsonArray --mode upsert --upsertFields _id
+
