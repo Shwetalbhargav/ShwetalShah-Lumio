@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: mangodesk-backend
+    env: node
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
